@@ -104,9 +104,9 @@ public class TyrantProcessor {
                     LOGGER.info("Card "
                             + unitElement.getElementsByTagName("id").item(0)
                                     .getTextContent()
-                            + " : " + unitName + " Lvl 1");
+                            + " : " + unitName + "-1");
                     cards.put(unitElement.getElementsByTagName("id").item(0)
-                            .getTextContent(), unitName + " Lvl 1");
+                            .getTextContent(), unitName + "-1");
 
                     NodeList upgradeList = unitElement
                             .getElementsByTagName("upgrade");
@@ -120,7 +120,7 @@ public class TyrantProcessor {
                                     + upgradeElement
                                             .getElementsByTagName("card_id")
                                             .item(0).getTextContent()
-                                    + " : " + unitName + " Lvl "
+                                    + " : " + unitName + "-"
                                     + upgradeElement
                                             .getElementsByTagName("level")
                                             .item(0).getTextContent());
@@ -128,7 +128,7 @@ public class TyrantProcessor {
                                     upgradeElement
                                             .getElementsByTagName("card_id")
                                             .item(0).getTextContent(),
-                                    unitName + " Lvl " + upgradeElement
+                                    unitName + "-" + upgradeElement
                                             .getElementsByTagName("level")
                                             .item(0).getTextContent());
                         }
@@ -159,9 +159,12 @@ public class TyrantProcessor {
                         .get(userCardKey);
                 LOGGER.info(cards.get(userCardKey) + " (" + userCardKey
                         + ") : Num Owned " + userCard.getString("num_owned"));
-                userCardDetails.add(new UserCard(userCardKey,
-                        cards.get(userCardKey), userCard.getInt("num_owned"),
-                        userCard.getInt("num_owned")));
+                if (userCard.getInt("num_owned") > 0) {
+                    userCardDetails.add(
+                            new UserCard(userCardKey, cards.get(userCardKey),
+                                    userCard.getInt("num_owned"),
+                                    userCard.getInt("num_owned")));
+                }
             }
         }
         return userCardDetails;

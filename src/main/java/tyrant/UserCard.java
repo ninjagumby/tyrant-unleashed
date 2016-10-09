@@ -30,7 +30,7 @@ public class UserCard {
     }
 
     public String toString() {
-        return cardName_ + "[" + numOwned_ + " owned, " + numUsed_ + " used]";
+        return cardName_ + "(" + numOwned_ + ")";
     }
 
 }

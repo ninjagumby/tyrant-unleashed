@@ -63,14 +63,13 @@ public class TyrantGui extends JFrame {
                 SpringLayout.NORTH, getContentPane());
         springLayout.putConstraint(SpringLayout.WEST, txtUserId, 6,
                 SpringLayout.EAST, lblUserId);
-        springLayout.putConstraint(SpringLayout.EAST, txtUserId, -531,
+        springLayout.putConstraint(SpringLayout.EAST, txtUserId, -443,
                 SpringLayout.EAST, getContentPane());
         getContentPane().add(txtUserId);
         txtUserId.setColumns(10);
 
         txtPasswordHash = new JTextField();
-        springLayout.putConstraint(SpringLayout.NORTH, txtPasswordHash, 6,
-                SpringLayout.SOUTH, txtUserId);
+        springLayout.putConstraint(SpringLayout.NORTH, txtPasswordHash, 6, SpringLayout.SOUTH, txtUserId);
         springLayout.putConstraint(SpringLayout.EAST, lblPasswordHash, -6,
                 SpringLayout.WEST, txtPasswordHash);
         springLayout.putConstraint(SpringLayout.NORTH, btnNewButton, 6,
@@ -88,18 +87,16 @@ public class TyrantGui extends JFrame {
         txtPasswordHash.setText(client_.getPasswordHash());
 
         JLabel lblCardTotal = new JLabel("");
-        springLayout.putConstraint(SpringLayout.WEST, lblCardTotal, 233,
-                SpringLayout.EAST, txtUserId);
+        springLayout.putConstraint(SpringLayout.WEST, lblCardTotal, 145, SpringLayout.EAST, txtUserId);
         springLayout.putConstraint(SpringLayout.SOUTH, lblCardTotal, 0,
                 SpringLayout.SOUTH, lblUserId);
-        springLayout.putConstraint(SpringLayout.EAST, lblCardTotal, 372,
-                SpringLayout.EAST, txtUserId);
+        springLayout.putConstraint(SpringLayout.EAST, lblCardTotal, -159, SpringLayout.EAST, getContentPane());
         getContentPane().add(lblCardTotal);
 
         cards_ = processor_.loadCardsFromInternet();
         lblCardTotal.setText("Loaded " + cards_.size() + " cards.");
         addDocumentListeners();
-        this.setSize(800, 600);
+        this.setSize(700, 200);
     }
 
     protected void writeFile(List<UserCard> userCards) {
