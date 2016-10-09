@@ -30,8 +30,8 @@ public class TyrantClient {
     private static final String TIME_HASH = "fgjk380vf34078oi37890ioj43";
 
     private MessageDigest md_;
-    private String userId_ = "4201263";
-    private String passwordHash_ = "6bf2febd3e1ed60833c8bcddfe00eed1";
+    private String userId_ = "";
+    private String passwordHash_ = "";
     private String syncode_ = "c9f48d49539e8b4ef5d065d383c37bdd942b6f37ad08cfe90cac10492e38f5e1";
 
     public TyrantClient() {
