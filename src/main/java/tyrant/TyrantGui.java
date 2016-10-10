@@ -26,14 +26,15 @@ public class TyrantGui extends JFrame {
     private JTextField txtUserId;
     private JTextField txtPasswordHash;
     private Map<String, String> cards_;
+    private JTextField txtSyncode;
 
     public TyrantGui(TyrantClient client) {
         SpringLayout springLayout = new SpringLayout();
         getContentPane().setLayout(springLayout);
 
         JButton btnNewButton = new JButton("Process Card Ownerships");
-        springLayout.putConstraint(SpringLayout.WEST, btnNewButton, 139,
-                SpringLayout.WEST, getContentPane());
+        springLayout.putConstraint(SpringLayout.SOUTH, btnNewButton, -37,
+                SpringLayout.SOUTH, getContentPane());
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 List<UserCard> userCards = processor_
@@ -59,6 +60,8 @@ public class TyrantGui extends JFrame {
         getContentPane().add(lblPasswordHash);
 
         txtUserId = new JTextField();
+        springLayout.putConstraint(SpringLayout.WEST, btnNewButton, 0,
+                SpringLayout.WEST, txtUserId);
         springLayout.putConstraint(SpringLayout.NORTH, txtUserId, 10,
                 SpringLayout.NORTH, getContentPane());
         springLayout.putConstraint(SpringLayout.WEST, txtUserId, 6,
@@ -69,11 +72,10 @@ public class TyrantGui extends JFrame {
         txtUserId.setColumns(10);
 
         txtPasswordHash = new JTextField();
-        springLayout.putConstraint(SpringLayout.NORTH, txtPasswordHash, 6, SpringLayout.SOUTH, txtUserId);
+        springLayout.putConstraint(SpringLayout.NORTH, txtPasswordHash, 6,
+                SpringLayout.SOUTH, txtUserId);
         springLayout.putConstraint(SpringLayout.EAST, lblPasswordHash, -6,
                 SpringLayout.WEST, txtPasswordHash);
-        springLayout.putConstraint(SpringLayout.NORTH, btnNewButton, 6,
-                SpringLayout.SOUTH, txtPasswordHash);
         springLayout.putConstraint(SpringLayout.WEST, txtPasswordHash, 139,
                 SpringLayout.WEST, getContentPane());
         springLayout.putConstraint(SpringLayout.EAST, txtPasswordHash, -379,
@@ -87,14 +89,35 @@ public class TyrantGui extends JFrame {
         txtPasswordHash.setText(client_.getPasswordHash());
 
         JLabel lblCardTotal = new JLabel("");
-        springLayout.putConstraint(SpringLayout.WEST, lblCardTotal, 145, SpringLayout.EAST, txtUserId);
+        springLayout.putConstraint(SpringLayout.WEST, lblCardTotal, 145,
+                SpringLayout.EAST, txtUserId);
         springLayout.putConstraint(SpringLayout.SOUTH, lblCardTotal, 0,
                 SpringLayout.SOUTH, lblUserId);
-        springLayout.putConstraint(SpringLayout.EAST, lblCardTotal, -159, SpringLayout.EAST, getContentPane());
+        springLayout.putConstraint(SpringLayout.EAST, lblCardTotal, -159,
+                SpringLayout.EAST, getContentPane());
         getContentPane().add(lblCardTotal);
 
         cards_ = processor_.loadCardsFromInternet();
         lblCardTotal.setText("Loaded " + cards_.size() + " cards.");
+
+        JLabel lblSyncode = new JLabel("Syncode:");
+        springLayout.putConstraint(SpringLayout.EAST, lblSyncode, 0,
+                SpringLayout.EAST, lblUserId);
+        getContentPane().add(lblSyncode);
+
+        txtSyncode = new JTextField();
+        springLayout.putConstraint(SpringLayout.WEST, txtSyncode, 6,
+                SpringLayout.EAST, lblSyncode);
+        springLayout.putConstraint(SpringLayout.EAST, txtSyncode, -185,
+                SpringLayout.EAST, getContentPane());
+        springLayout.putConstraint(SpringLayout.NORTH, lblSyncode, 5,
+                SpringLayout.NORTH, txtSyncode);
+        springLayout.putConstraint(SpringLayout.NORTH, txtSyncode, 6,
+                SpringLayout.SOUTH, txtPasswordHash);
+        getContentPane().add(txtSyncode);
+        txtSyncode.setColumns(10);
+        txtSyncode.setText(client_.getSyncode());
+
         addDocumentListeners();
         this.setSize(700, 200);
     }
@@ -156,5 +179,18 @@ public class TyrantGui extends JFrame {
                         client_.setPasswordHash(txtPasswordHash.getText());
                     }
                 });
+        txtSyncode.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                client_.setSyncode(txtSyncode.getText());
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                client_.setSyncode(txtSyncode.getText());
+            }
+
+            public void insertUpdate(DocumentEvent e) {
+                client_.setSyncode(txtSyncode.getText());
+            }
+        });
     }
 }

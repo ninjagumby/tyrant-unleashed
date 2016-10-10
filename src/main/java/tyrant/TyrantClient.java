@@ -147,4 +147,12 @@ public class TyrantClient {
     public String getPasswordHash() {
         return passwordHash_;
     }
+
+    public void setSyncode(String syncode) {
+        syncode_ = syncode;
+    }
+    
+    public String getSyncode() {
+        return syncode_;
+    }
 }
